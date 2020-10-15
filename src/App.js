@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react'
+// import {BrowserRouter as Router,Switch, Route} from "react-router-dom" 相当于vue-router的history
+import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom"//相当于vue-router中的hash
+import Login from './layout/Login'
+import Index from './layout/Index'
+import { getStorage } from './utils/storage'
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/login" component={Login} />
+        {/* <Route path="/" component={Index} /> */}
+        <Route path="/" render = { () => { // 在本地储存判断是登录还是未登录的状态
+          return getStorage('loginStart') === 'true' ? <Index/> : <Redirect to="/login"/>
+          //  if (getStorage('loginStart') === 'true') { return <Index/>} else { return <Redirect to="/login"/>} 
+        }} />
+      </Switch>
+    </Router>
   );
 }
 

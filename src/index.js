@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import zhCN from 'antd/es/locale/zh_CN'
+import { ConfigProvider } from 'antd'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ConfigProvider locale={zhCN}>
+      <App />
+  </ConfigProvider>,
   document.getElementById('root')
 );
 
